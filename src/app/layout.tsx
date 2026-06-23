@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
+import { ClerkProviderWrapper } from '@/components/clerk-provider';
 import "./globals.css";
-import { AuthProvider } from "@/lib/auth/auth-context";
 
 export const metadata: Metadata = {
-  title: "SokoPay",
+  title: "SökoPay",
   description: "Digital operating layer for local commerce in Kenya",
 };
 
@@ -13,10 +13,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-neutral-50 antialiased">
-        <AuthProvider>{children}</AuthProvider>
-      </body>
-    </html>
+    <ClerkProviderWrapper>
+      <html lang="en">
+        <body className="min-h-screen bg-neutral-50 antialiased">
+          {children}
+        </body>
+      </html>
+    </ClerkProviderWrapper>
   );
 }

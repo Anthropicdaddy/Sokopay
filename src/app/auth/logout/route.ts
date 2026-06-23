@@ -1,14 +1,10 @@
 import { NextResponse } from 'next/server';
-import { supabase } from '@/lib/supabase';
 
 export async function POST() {
-  try {
-    await supabase.auth.signOut();
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    return NextResponse.json(
-      { error: 'Failed to logout' },
-      { status: 500 }
-    );
-  }
+  // For Clerk in App Router, sign out is typically handled client-side
+  // Return success and let client handle the actual sign out via Clerk's frontend
+  return new NextResponse(JSON.stringify({ status: 'ok' }), {
+    status: 200,
+    headers: { 'Content-Type': 'application/json' },
+  });
 }
